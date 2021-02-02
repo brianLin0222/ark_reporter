@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+#Gmail API credential
+credentials.json
+token.pickle
+
+
+#local files
+*.xlsx
+*.csv
