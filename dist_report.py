@@ -26,8 +26,7 @@ from email import encoders
 
 
 API = ["https://www.googleapis.com/auth/gmail.send"]
-SENDER = "lazyinvestor.io@gmail.com"
-RECIP = ["brianlin.0222@gmail.com","brianlinandroidacc@gmail.com"]
+
 REPORT_PATH = r"./report"
 
 
