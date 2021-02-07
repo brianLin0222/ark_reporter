@@ -7,3 +7,6 @@ Too lazy to pull ETF data from [ARK Invest Website](https://ark-funds.com/) ever
 
 ## :mag_right: Screenshot
 ![alt text](https://github.com/brianLin0222/ark_reporter/blob/main/img/screenshot2.png)
+
+## :bar_chart: Treemap Update
+![alt text](https://github.com/brianLin0222/ark_reporter/blob/main/img/ARKK.png)
