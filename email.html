@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>   
+	    <style type="text/css">
+	    	:root {
+	    		--table-radius: 6px;
+	    	}
+	    	body {
+	    		font-family: arial, sans-serif;
+	    	}
+	    	/*.dataframe {
+	    		border-collapse: collapse;
+	    	}*/
+	    	table {
+				font-family: arial, sans-serif;
+				border-collapse: collapse;
+				width: 80%;
+				border: none;
+			}
+
+			thead {
+				background-color: #5e9cff;
+				color: #ffffff;
+				/*border-top: none;*/
+			}
+/*
+			thead tr:first-child th:first-child {
+			    border-radius: 6px 0 0 0;
+			}
+
+			thead tr:first-child th:last-child {
+			    border-radius: 0 6px 0 0;
+			}
+
+			tbody tr:last-child td:first-child {
+			    border-radius: 0 0 0 6px;
+			}
+
+			tbody tr:last-child td:last-child {
+			    border-radius: 0 0 6px 0;
+			}*/
+
+			td, th {
+				border: 1px solid #d4d4d4;
+				/*border: none;*/
+				text-align: left;
+				padding: 8px;
+			}
+
+
+			#bannerimage {
+			  width: 100%;
+			  background-image: url(https://cdn.mos.cms.futurecdn.net/wtqqnkYDYi2ifsWZVW2MT4-1200-80.jpg);
+			  height: 100px;
+			  background-position: center;
+			  border-radius: 15px;
+			}
+
+
+			#bannertext {
+				padding-top: 30px;
+				padding-left: 40px;
+				font-size: 230%;
+				font-weight: bold;
+				color: white;
+				font-family: Monospace;
+			}
+
+
+			/*tr:nth-child(even) {
+				background-color: #dddddd;
+			}*/
+
+	    </style>
+	</head>
+	<body>
+		<div id="bannerimage">
+			<div id="bannertext"> Lazy AF</div>
+		</div>
+		<h2><img width="19" alt="Bell font awesome" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Bell_font_awesome.svg/512px-Bell_font_awesome.svg.png"> New tickers:</h2>
+    	<div id="content">{{ new_df }}</div>
+    	<p></p>
+    	<h2><img width="19" alt="Trash font awesome" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/512px-Trash_font_awesome.svg.png"> Removed tickers:</h2>
+    	<div id="content">{{ remove_df }}</div>
+		<!-- <div>
+			<table border="1" class="dataframe">
+			  <thead>
+			    <tr style="text-align: right;">
+			      <th>date</th>
+			      <th>fund</th>
+			      <th>company</th>
+			      <th>ticker</th>
+			      <th>cusip</th>
+			      <th>shares</th>
+			      <th>"market value($)"</th>
+			      <th>weight(%)</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td>2/5/2021</td>
+			      <td>ARKK</td>
+			      <td>"TESLA INC"</td>
+			      <td>TSLA</td>
+			      <td>88160R101</td>
+			      <td>2855797.00</td>
+			      <td>2.433796e+09</td>
+			      <td>9.45</td>
+			    </tr>
+			    <tr>
+			      <td>2/5/2021</td>
+			      <td>ARKK</td>
+			      <td>"ROKU INC"</td>
+			      <td>ROKU</td>
+			      <td>77543R102</td>
+			      <td>3898313.00</td>
+			      <td>1.714829e+09</td>
+			      <td>6.66</td>
+			    </tr>
+			    <tr>
+			      <td>2/5/2021</td>
+			      <td>ARKK</td>
+			      <td>"TELADOC HEALTH INC"</td>
+			      <td>TDOC</td>
+			      <td>87918A105</td>
+			      <td>4709015.00</td>
+			      <td>1.342211e+09</td>
+			      <td>5.21</td>
+			    </tr>
+			    <tr>
+			      <td>2/5/2021</td>
+			      <td>ARKK</td>
+			      <td>"SQUARE INC - A"</td>
+			      <td>SQ</td>
+			      <td>852234103</td>
+			      <td>4992810.00</td>
+			      <td>1.200172e+09</td>
+			      <td>4.66</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div> -->
+	</body>
+</html>
+

@@ -33,11 +33,16 @@ def prettify(portf_id,df_dict):
 
 def report_std(df):    
     df = df.rename(columns={'date_t0':'Current Date',
-                        'company_t0':'Company name',
+                        'date_t1':'Previous Date',
+                        'fund_t0':'ETF Name',
+                        'fund_t1':'ETF name',
+                        'company_t0':'Company Name',
+                        'company_t1':'Company name',
                         'ticker_t0':'Ticker',
+                        'ticker_t1':'Ticker ',
                         'cusip':'CUSIP',
                         'shares_t0':'Current # of shares',
-                        '"market value($)"_t0':'Previous Market Value',
+                        '"market value($)"_t0':'Current Market Value',
                         'weight(%)_t0':'Current Weight %',
                         'date_t1':'Previous Date',
                         'shares_t1':'Previous # of shares',
@@ -58,14 +63,18 @@ class run_analysis():
     
     def new_members(df):
         df = df.loc[df['_merge']=='left_only']
-        df = df[['fund_t0','company_t0','ticker_t0','cusip']]
+        df = df[['fund_t0','date_t0','company_t0','ticker_t0','cusip','shares_t0','"market value($)"_t0','weight(%)_t0']]
+        df['"market value($)"_t0'] = df['"market value($)"_t0'].map('{:,}'.format)
+        df['shares_t0'] = df['shares_t0'].map('{:,}'.format)
         df = report_std(df)
         return df
     
     
     def removed_members(df):
         df = df.loc[df['_merge']=='right_only']
-        df = df[['fund_t0','company_t0','ticker_t0','cusip']]
+        df = df[['fund_t1','date_t1','company_t1','ticker_t1','cusip','shares_t1','"market value($)"_t1','weight(%)_t1']]
+        df['"market value($)"_t1'] = df['"market value($)"_t1'].map('{:,}'.format)
+        df['shares_t1'] = df['shares_t1'].map('{:,}'.format)
         df = report_std(df)
         return df
     
@@ -104,5 +113,3 @@ class run_analysis():
         weight_df = run_analysis.weight_cht(dfc)
         return dict(new_members=new_df, del_members=del_df, share_change=share_df, val_change=val_df, weight_change=weight_df)
         
-
-

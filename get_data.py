@@ -58,3 +58,4 @@ class ARKreport():
             df.to_csv(f"{SAVE_PATH}/{self.ticker}/{self.ticker}_{date.today().strftime('%Y%m%d')}.csv",index=False)
         except Exception as err:
             raise Exception(f"Unable to generate CSV file, error:{err}")
+            

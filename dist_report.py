@@ -1,16 +1,3 @@
-# from email.mime.text import MIMEText
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.image import MIMEImage
-# from email.mime.audio import MIMEAudio
-# from email.mime.base import MIMEBase
-# # from google.oauth2 import service_account
-# # from googleapiclient.discovery import build
-# from apiclient import errors
-# import base64
-# import os
-# import mimetypes
-
-
 import pickle
 import os.path
 import base64
@@ -26,7 +13,6 @@ from email import encoders
 
 
 API = ["https://www.googleapis.com/auth/gmail.send"]
-
 REPORT_PATH = r"./report"
 
 
@@ -104,6 +90,3 @@ class create_content():
                 msg.attach(part)
             
         return self._msgEncode(msg)
-
-
-    
