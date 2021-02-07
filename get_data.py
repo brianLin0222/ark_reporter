@@ -17,13 +17,17 @@ SAVE_PATH = r"./download"
 
 
 
+
+
+
+
 class ARKreport():
-    def __init__(self,ark_ticker):
+    def __init__(self,ark_ticker,debug=False):
         self.resp = None
         self.raw_data = None
         self.ticker = ark_ticker
         self.report_name = REPORTS[ark_ticker]
-        self._run()
+        None if debug else self._run()
 
 
     def _fetchData(self):
@@ -53,9 +57,11 @@ class ARKreport():
     def _run(self):
         self._fetchData()
         self._formatData()
-        try:
-            df = DataFrame(self.raw_data[1:],columns=self.raw_data[0])
-            df.to_csv(f"{SAVE_PATH}/{self.ticker}/{self.ticker}_{date.today().strftime('%Y%m%d')}.csv",index=False)
-        except Exception as err:
-            raise Exception(f"Unable to generate CSV file, error:{err}")
-            
+        if self.raw_data[1][0] == f'{datetime.today().month}/{datetime.today().day}/{datetime.today().year}':
+            try:
+                df = DataFrame(self.raw_data[1:],columns=self.raw_data[0])
+                df.to_csv(f"{SAVE_PATH}/{self.ticker}/{self.ticker}_{date.today().strftime('%Y%m%d')}.csv",index=False)
+            except Exception as err:
+                raise Exception(f"Unable to generate CSV file, error:{err}")
+        else:
+            raise Exception(f'No data available of {self.ticker} for {datetime.today().month}/{datetime.today().day}/{datetime.today().year} yet!')
