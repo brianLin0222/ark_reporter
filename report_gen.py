@@ -47,7 +47,11 @@ def report_std(df):
                         'date_t1':'Previous Date',
                         'shares_t1':'Previous # of shares',
                         '"market value($)"_t1':'Previous Market Value',
-                        'weight(%)_t1':'Previous Weight %'})
+                        'weight(%)_t1':'Previous Weight %',
+                        'cur_px':'Current Closing',
+                        'prev_px':'Previous Closing',
+                        'closing_chg':'Price Diff($)',
+                        'perc_chg':'Price Change(%)'})
     return df
 
 
@@ -96,13 +100,29 @@ class run_analysis():
         return df_chg
     
     
-    def weight_cht(df):
+    def weight_chg(df):
         df_chg = df.loc[(df['weight(%)_t0']!=df['weight(%)_t1'])&(df['_merge']=='both'),]
         df_chg = df_chg.assign(diff = df_chg['weight(%)_t0']-df_chg['weight(%)_t1'])
         df_chg = df_chg[['date_t0','company_t0','ticker_t0','cusip','weight(%)_t0','date_t1','weight(%)_t1','diff']]
         df_chg = report_std(df_chg)
         return df_chg
 
+
+    def closing_chg(df):
+        df = df.loc[(df['_merge']=='both')|(df['_merge']=='left'),]
+        df_chg = df[['fund_t0','date_t0','company_t0','ticker_t0','cusip','shares_t0','"market value($)"_t0','weight(%)_t0','"market value($)"_t1','shares_t1']]
+        df_chg = df_chg.assign(
+            cur_px = (df_chg['"market value($)"_t0']/df_chg['shares_t0']),
+            prev_px = (df_chg['"market value($)"_t1']/df_chg['shares_t1']),
+            closing_chg = (df_chg['"market value($)"_t0']/df_chg['shares_t0'])-(df_chg['"market value($)"_t1']/df_chg['shares_t1']),
+            perc_chg = (((df_chg['"market value($)"_t0']/df_chg['shares_t0'])-(df_chg['"market value($)"_t1']/df_chg['shares_t1']))/(df_chg['"market value($)"_t1']/df_chg['shares_t1']))*100
+            )
+        # df_chg['"market value($)"_t0'] = df_chg['"market value($)"_t0'].map('{:,}'.format)
+        # df_chg['shares_t0'] = df_chg['shares_t0'].map('{:,}'.format)
+        df_chg = df_chg[['fund_t0','date_t0','company_t0','ticker_t0','cusip','weight(%)_t0','cur_px','prev_px','closing_chg','perc_chg']]
+        df_chg = report_std(df_chg)
+        return df_chg
+    
     
     def run_all(filenames):
         dfc = run_analysis.combine_file(filenames)
@@ -110,6 +130,7 @@ class run_analysis():
         del_df = run_analysis.removed_members(dfc)
         share_df = run_analysis.share_chg(dfc)
         val_df = run_analysis.value_chg(dfc)
-        weight_df = run_analysis.weight_cht(dfc)
-        return dict(new_members=new_df, del_members=del_df, share_change=share_df, val_change=val_df, weight_change=weight_df)
+        weight_df = run_analysis.weight_chg(dfc)
+        px_df = run_analysis.closing_chg(dfc)
+        return dict(new_members=new_df, del_members=del_df, share_change=share_df, val_change=val_df, weight_change=weight_df, px_diff=px_df)
         

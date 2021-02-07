@@ -67,6 +67,19 @@
 			}
 
 
+			.column {
+			  float: left;
+			  width: 45%;
+			  padding: 5px;
+			}
+
+			/* Clearfix (clear floats) */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+
 			/*tr:nth-child(even) {
 				background-color: #dddddd;
 			}*/
@@ -77,69 +90,39 @@
 		<div id="bannerimage">
 			<div id="bannertext"> Lazy AF</div>
 		</div>
+		<hr>
 		<h2><img width="19" alt="Bell font awesome" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Bell_font_awesome.svg/512px-Bell_font_awesome.svg.png"> New tickers:</h2>
     	<div id="content">{{ new_df }}</div>
     	<p></p>
     	<h2><img width="19" alt="Trash font awesome" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/512px-Trash_font_awesome.svg.png"> Removed tickers:</h2>
     	<div id="content">{{ remove_df }}</div>
-		<!-- <div>
-			<table border="1" class="dataframe">
-			  <thead>
-			    <tr style="text-align: right;">
-			      <th>date</th>
-			      <th>fund</th>
-			      <th>company</th>
-			      <th>ticker</th>
-			      <th>cusip</th>
-			      <th>shares</th>
-			      <th>"market value($)"</th>
-			      <th>weight(%)</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td>2/5/2021</td>
-			      <td>ARKK</td>
-			      <td>"TESLA INC"</td>
-			      <td>TSLA</td>
-			      <td>88160R101</td>
-			      <td>2855797.00</td>
-			      <td>2.433796e+09</td>
-			      <td>9.45</td>
-			    </tr>
-			    <tr>
-			      <td>2/5/2021</td>
-			      <td>ARKK</td>
-			      <td>"ROKU INC"</td>
-			      <td>ROKU</td>
-			      <td>77543R102</td>
-			      <td>3898313.00</td>
-			      <td>1.714829e+09</td>
-			      <td>6.66</td>
-			    </tr>
-			    <tr>
-			      <td>2/5/2021</td>
-			      <td>ARKK</td>
-			      <td>"TELADOC HEALTH INC"</td>
-			      <td>TDOC</td>
-			      <td>87918A105</td>
-			      <td>4709015.00</td>
-			      <td>1.342211e+09</td>
-			      <td>5.21</td>
-			    </tr>
-			    <tr>
-			      <td>2/5/2021</td>
-			      <td>ARKK</td>
-			      <td>"SQUARE INC - A"</td>
-			      <td>SQ</td>
-			      <td>852234103</td>
-			      <td>4992810.00</td>
-			      <td>1.200172e+09</td>
-			      <td>4.66</td>
-			    </tr>
-			  </tbody>
-			</table>
-		</div> -->
+    	<p></p>
+    	<hr>
+    	<h2><img width="19" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Font_Awesome_5_regular_chart-bar.svg/512px-Font_Awesome_5_regular_chart-bar.svg.png"> Performance:</h2>
+    	<div class="row">
+    		<h3>ARK Innovation ETF</h3>
+			<img src="cid:ARKK" width="80%">
+    	</div>
+    	<div class="row">
+    		<div class="column">
+    			<h3>ARK Fintech Innovation ETF</h3>
+    			<img src="cid:ARKF" width="100%">
+    		</div>
+    		<div class="column">
+    			<h3>ARK Next Generation Internet ETF</h3>
+    			<img src="cid:ARKW" width="100%">
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="column">
+    			<h3>ARK Genomic Revolution ETF</h3>
+	    		<img src="cid:ARKG" width="100%">
+	    	</div>
+	    	<div class="column">
+	    		<h3>ARK Autonomous Technology & Robotics</h3>
+				<img src="cid:ARKQ" width="100%">
+			</div>
+		</div>
 	</body>
 </html>
 

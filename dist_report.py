@@ -78,9 +78,13 @@ class create_content():
             html = MIMEText(message,'html')
             msg.attach(html)
         if img:
-            with open(img, 'rb') as pic:
-                image_b = MIMEImage(pic.read())
-            msg.attach(image_b)
+            for pictures in img:
+                with open(pictures, 'rb') as pic:
+                    image_b = MIMEImage(pic.read())
+                    cid = pictures.split("/")[-1].split(".")[0]
+                    image_b.add_header('Content-ID', '<{}>'.format(cid))
+                    image_b.add_header('Content-Disposition','inline',filename=f'{cid}.png')
+                msg.attach(image_b)
         if attach:
             for file in attach:
                 part = MIMEBase('application', "octet-stream")
