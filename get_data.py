@@ -1,4 +1,5 @@
 import requests
+import os
 from datetime import *
 from pandas import DataFrame
 
@@ -12,7 +13,7 @@ REPORTS = {
             "ARKG":  "ARK_GENOMIC_REVOLUTION_MULTISECTOR_ETF_ARKG_HOLDINGS",
             "ARKF":  "ARK_FINTECH_INNOVATION_ETF_ARKF_HOLDINGS"
             }
-SAVE_PATH = r"./download"
+SAVE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"download")
 
 
 
@@ -60,7 +61,7 @@ class ARKreport():
         if self.raw_data[1][0] == f'{datetime.today().month}/{datetime.today().day}/{datetime.today().year}':
             try:
                 df = DataFrame(self.raw_data[1:],columns=self.raw_data[0])
-                df.to_csv(f"{SAVE_PATH}/{self.ticker}/{self.ticker}_{date.today().strftime('%Y%m%d')}.csv",index=False)
+                df.to_csv(f"{SAVE_PATH}/{self.ticker}/{self.ticker}_{datetime.today().strftime('%Y%m%d')}.csv",index=False)
             except Exception as err:
                 raise Exception(f"Unable to generate CSV file, error:{err}")
         else:

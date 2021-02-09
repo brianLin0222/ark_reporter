@@ -4,10 +4,12 @@ from dist_report import *
 from content import *
 from charts import *
 from json import load
+import os
 
 
 LINE_CHG = '\n'
-IMG_PATH = [r'./img/elon-featured.jpg']
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+IMG_PATH = [os.path.join(BASE_PATH,'img','elon-featured.jpg')]
 
 ## there is zero exception handling here because I am too lazy
 ## also there are path references in those .py files, again I am too lazy to change them
@@ -33,7 +35,7 @@ def run_all(get_data=True):
         fig = img.get_figure()
         fig.set_figwidth(16)
         fig.set_figheight(9)
-        img_path = f'./img/{k}.png'
+        img_path = os.path.join(BASE_PATH,'img',f'{k}.png')
         fig.savefig(img_path,bbox_inches='tight')
         charts.append(img_path)
         plt.close(fig)
@@ -43,7 +45,7 @@ def run_all(get_data=True):
         prettify(k,report)
         
     
-    with open(r'./config.json') as cfg:
+    with open(os.path.join(BASE_PATH,'config.json')) as cfg:
         config = load(cfg)
     
     
@@ -63,7 +65,7 @@ def run_all(get_data=True):
 
 
 
-# if __name__ == "__main__":
-#     run_all()
+if __name__ == "__main__":
+    run_all()
     
     

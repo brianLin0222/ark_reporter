@@ -13,23 +13,28 @@ from email import encoders
 
 
 API = ["https://www.googleapis.com/auth/gmail.send"]
-REPORT_PATH = r"./report"
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+SAVE_PATH = os.path.join(BASE_PATH,"report")
+TOKEN_PATH = os.path.join(BASE_PATH,'token.pickle')
+CRED_PATH = os.path.join(BASE_PATH,'credentials.json')
+REPORT_PATH = os.path.join(BASE_PATH,"report")
 
 
 def find_token():
     try:
-        if os.path.exists('token.pickle'):
-            with open('token.pickle','rb') as tk:
+        if os.path.exists(TOKEN_PATH):
+            with open(TOKEN_PATH,'rb') as tk:
                 creds = pickle.load(tk)
+            
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', API)
+                    CRED_PATH, API)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open('token.pickle', 'wb') as token:
+            with open(TOKEN_PATH, 'wb') as token:
                 pickle.dump(creds, token)
         return creds
     

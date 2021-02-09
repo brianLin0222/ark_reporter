@@ -3,8 +3,9 @@ import pandas as pd
 
 
 
-SAVE_PATH = r"./download"
-REPORT_PATH = r"./report"
+SAVE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"download")
+REPORT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"report")
+
 
 
 
